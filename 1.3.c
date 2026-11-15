@@ -2,11 +2,6 @@
 #include <stdlib.h>
 
 /**
- * @brief Ускорение свободного падения (м/с^2)
- */
-const double GRAVITY = 9.81;
-
-/**
  * @brief Считывает с клавиатуры значение с плавающей точкой
  * @return Считанное значение
  */
@@ -15,16 +10,18 @@ double getDouble();
 /**
  * @brief Вычисляет силу тяжести, действующую на объект
  * @param m масса объекта в килограммах
+ * @param g ускорение свободного падения
  * @return Рассчитанное значение силы тяжести
  */
-double gravityForce(const double m);
+double gravityForce(const double m, const double g);
 
 /**
  * @brief Вычисляет вес объекта, покоящегося на горизонтальной опоре
  * @param m масса объекта в килограммах
+ * @param g ускорение свободного падения
  * @return Рассчитанное значение веса
  */
-double weight(const double m);
+double weight(const double m, const double g);
 
 /**
  * @brief Точка входа в программу
@@ -33,13 +30,14 @@ double weight(const double m);
 int main()
 {
     const double m = getDouble();
+    const double GRAVITY = 9.81;
     if (m < 0)
     {
         printf("Ошибка: масса не может быть отрицательной.\n");
         return 1;
     }
-    printf("Сила тяжести: %.3f\n", gravityForce(m));
-    printf("Вес мешка: %.3f\n", weight(m));
+    printf("Сила тяжести: %.3f\n", gravityForce(m, GRAVITY));
+    printf("Вес мешка: %.3f\n", weight(m, GRAVITY));
     return 0;
 }
 
@@ -54,12 +52,12 @@ double getDouble()
     return val;
 }
 
-double gravityForce(const double m)
+double gravityForce(const double m, const double g)
 {
-    return m * GRAVITY;
+    return m * g;
 }
 
-double weight(const double m)
+double weight(const double m, const double g)
 {
-    return m * GRAVITY;
+    return m * g;
 }
