@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 /**
  * @brief Считывает с клавиатуры значение с плавающей точкой
@@ -35,30 +36,39 @@ double volume(const double edge);
 int main()
 {
     const double edge = getDouble();
-    printf("Площадь грани куба: %.3f\n",faceArea(edge));
-    printf("Площадь полной поверхности куба: %.3f\n",totalSurfaceArea(edge));
-    printf("Объем куба: %.3f\n",volume(edge));
+    if (edge <= 0.0)
+    {
+        printf("Ошибка: длина ребра должна быть положительной.\n");
+        return 1;
+    }
+    printf("Площадь грани куба: %.3f\n", faceArea(edge));
+    printf("Площадь полной поверхности куба: %.3f\n", totalSurfaceArea(edge));
+    printf("Объем куба: %.3f\n", volume(edge));
     return 0;
 }
 
 double getDouble()
 {
     double val = 0.0;
-    scanf("%lf",&val);
+    if (scanf("%lf", &val) != 1)
+    {
+        printf("Ошибка: некорректный ввод данных.\n");
+        exit(1);
+    }
     return val;
 }
 
 double faceArea(const double edge)
 {
-    return pow(edge,2);
+    return pow(edge, 2);
 }
 
 double totalSurfaceArea(const double edge)
 {
-    return 6 * pow(edge,2);
+    return 6 * pow(edge, 2);
 }
 
 double volume(const double edge)
 {
-    return pow(edge,3);
+    return pow(edge, 3);
 }
